@@ -7,13 +7,28 @@ class TipoMantenimiento(models.Model):
     def __str__(self):
         return self.nombre
     
-class Maquina(models.Model):
-    nro_serial = models.CharField(max_length=50)
-    horas_uso = models.IntegerField()
-    disponible = models.BooleanField()
+class Fabricante(models.Model):
+    nombre = models.CharField(max_length=50)
 
     def __str__(self):
-        return self.nro_serial
+        return self.nombre
+
+class TipoMaquina(models.Model):
+    nombre = models.CharField(max_length=50)
+    fabricante = models.ForeignKey(Fabricante, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.nombre + ' - ' + self.fabricante.__str__()
+
+    
+class Maquina(models.Model):
+    nro_serie = models.CharField(max_length=50)
+    horas_uso = models.IntegerField()
+    disponible = models.BooleanField()
+    tipo = models.ForeignKey(TipoMaquina, on_delete=models.CASCADE, blank=True, null=True)
+
+    def __str__(self):
+        return self.nro_serie
 
 class VisitaMantenimiento(models.Model):
     fecha_hora = models.DateTimeField()

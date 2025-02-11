@@ -17,6 +17,9 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
+from maquinas.views import MaquinaSearchView
+
 urlpatterns = [
     path("admin/", admin.site.urls),
+    path("maquinas/", MaquinaSearchView.as_view()),
 ]

@@ -25,7 +25,10 @@ SECRET_KEY = "django-insecure-6q8r+n8$hz5zf35u+72+^7a!n70j%stu^3@x#ddus#(=rig*iy
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
+CORS_ORIGIN_ALLOW_ALL = True
+
+CSRF_TRUSTED_ORIGINS = ["https://gimnasioapi.cabrera.ar"]
 
 
 # Application definition
@@ -38,12 +41,18 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
 
+    "rest_framework",
+    'corsheaders',
+
     "personas",
     "maquinas",
     "stock",
+    "salud",
+    "analisis",
 ]
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
